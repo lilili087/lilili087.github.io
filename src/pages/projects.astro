@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    title: '电商产品设计',
+    description: '为某电商平台设计的移动端购物体验，从用户研究到视觉设计全流程参与。',
+    image: '',
+    tags: ['UI/UX', '用户研究', 'Figma'],
+    highlights: ['日活提升 25%', '转化率提升 18%'],
+    link: '',
+    github: '',
+  },
+  {
+    title: '数据可视化平台',
+    description: '设计并实现的数据分析平台，帮助业务团队更好地理解数据。',
+    image: '',
+    tags: ['React', 'D3.js', '数据可视化'],
+    highlights: ['支持 10+ 图表类型', '响应式设计'],
+    link: '',
+    github: '',
+  },
+  {
+    title: '个人博客系统',
+    description: '基于 Astro 构建的静态博客，支持 Markdown 写作和自动化部署。',
+    image: '',
+    tags: ['Astro', 'TypeScript', 'GitHub Pages'],
+    highlights: ['SEO 友好', '加载速度 < 1s'],
+    link: '',
+    github: 'https://github.com/lilili087',
+  },
+];
+---
+
+<BaseLayout title="项目展示 - Xinxin Li">
+  <div class="container">
+    <section class="section">
+      <h2 class="section-title">项目展示</h2>
+      <p style="color: var(--color-text-light); margin-bottom: 2rem;">
+        这里展示了我参与的一些代表性项目，涵盖产品设计、前端开发等领域。
+      </p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+        {projects.map((project) => (
+          <div style="border: 1px solid var(--color-border); border-radius: var(--radius); overflow: hidden; transition: all 0.2s; background: white;">
+            {project.image ? (
+              <img 
+                src={project.image} 
+                alt={project.title}
+                style="width: 100%; height: 200px; object-fit: cover;"
+              />
+            ) : (
+              <div style="width: 100%; height: 200px; background: linear-gradient(135deg, var(--color-primary-light) 0%, #f0f9ff 100%); display: flex; align-items: center; justify-content: center; color: var(--color-primary); font-size: 3rem;">
+                📁
+              </div>
+            )}
+            
+            <div style="padding: 1.5rem;">
+              <h3 style="font-weight: 600; font-size: 1.2rem; color: var(--color-text); margin-bottom: 0.75rem;">{project.title}</h3>
+              <p style="color: var(--color-text-light); font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.6;">{project.description}</p>
+              
+              <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                {project.tags.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+              
+              {project.highlights && project.highlights.length > 0 && (
+                <ul style="list-style: none; color: var(--color-text-light); font-size: 0.9rem; margin-bottom: 1rem;">
+                  {project.highlights.map((highlight) => (
+                    <li style="margin-bottom: 0.25rem;">• {highlight}</li>
+                  ))}
+                </ul>
+              )}
+              
+              <div style="display: flex; gap: 0.75rem;">
+                {project.link && (
+                  <a href={project.link} class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;">查看项目</a>
+                )}
+                {project.github && (
+                  <a href={project.github} class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem; background: white; color: var(--color-text); border: 1px solid var(--color-border);">
+                    GitHub
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

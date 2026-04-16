@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const experiences = [
+  {
+    company: '某科技公司',
+    position: '产品设计师',
+    startDate: '2024.06',
+    current: true,
+    description: '负责核心产品的设计和优化，与跨职能团队协作推动产品迭代。',
+    highlights: [
+      '主导 XX 功能 redesign，用户满意度提升 35%',
+      '建立设计系统，提升团队设计效率 40%',
+      '参与用户研究，输出 10+ 份研究报告',
+    ],
+  },
+  {
+    company: '某创业公司',
+    position: 'UI/UX 设计师',
+    startDate: '2023.01',
+    endDate: '2024.05',
+    current: false,
+    description: '从 0 到 1 设计产品界面，参与产品策略制定。',
+    highlights: [
+      '完成产品从概念到上线的全流程设计',
+      '设计移动端和 Web 端界面',
+      '与开发团队紧密配合，确保设计落地',
+    ],
+  },
+];
+---
+
+<BaseLayout title="工作经历 - Xinxin Li">
+  <div class="container">
+    <section class="section">
+      <h2 class="section-title">工作经历</h2>
+      
+      <div style="margin-top: 2rem;">
+        {experiences.map((exp, index) => (
+          <div style={`position: relative; padding-left: 2rem; margin-bottom: 3rem; ${index !== experiences.length - 1 ? 'border-left: 2px solid var(--color-primary-light);' : ''}`}>
+            <div style="position: absolute; left: -6px; top: 0; width: 10px; height: 10px; background: var(--color-primary); border-radius: 50%;"></div>
+            
+            <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                <div>
+                  <h3 style="font-weight: 600; font-size: 1.2rem; color: var(--color-text);">{exp.position}</h3>
+                  <p style="color: var(--color-primary); font-weight: 500;">{exp.company}</p>
+                </div>
+                <div style="color: var(--color-text-light); font-size: 0.9rem;">
+                  {exp.startDate} - {exp.current ? '至今' : exp.endDate}
+                </div>
+              </div>
+              
+              <p style="color: var(--color-text-light); margin-bottom: 1rem; line-height: 1.7;">{exp.description}</p>
+              
+              {exp.highlights && exp.highlights.length > 0 && (
+                <ul style="list-style: none; color: var(--color-text-light);">
+                  {exp.highlights.map((highlight) => (
+                    <li style="margin-bottom: 0.5rem; padding-left: 1.25rem; position: relative;">
+                      <span style="position: absolute; left: 0; color: var(--color-primary);">•</span>
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

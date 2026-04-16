@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人网站管理后台</title>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+</head>
+<body>
+  <script>
+    CMS.registerPreviewTemplate('profile', () => {
+      return `<div class="preview-card">
+        <h2>${CMS.getWidget('string').forKey('name')}</h2>
+        <p>${CMS.getWidget('text').forKey('title')}</p>
+      </div>`;
+    });
+
+    CMS.init({
+      config: {
+        backend: {
+          name: 'github',
+          repo: 'lilili087/lilili087.github.io',
+          branch: 'main',
+        },
+        media_folder: 'src/images',
+        public_folder: '/images',
+        collections: [
+          {
+            name: 'profile',
+            label: '个人信息',
+            folder: 'src/content/profile',
+            create: false,
+            editor: { preview: false },
+            fields: [
+              { name: 'name', label: '姓名', widget: 'string' },
+              { name: 'title', label: '职位/头衔', widget: 'string' },
+              { name: 'email', label: '邮箱', widget: 'string' },
+              { name: 'phone', label: '电话', widget: 'string', required: false },
+              { name: 'location', label: '所在地', widget: 'string', required: false },
+              { name: 'avatar', label: '头像图片', widget: 'image', required: false },
+              { name: 'bio', label: '个人简介', widget: 'text' },
+              { name: 'github', label: 'GitHub 链接', widget: 'string', required: false },
+              { name: 'linkedin', label: 'LinkedIn 链接', widget: 'string', required: false },
+              { name: 'website', label: '个人网站', widget: 'string', required: false },
+            ],
+          },
+          {
+            name: 'experience',
+            label: '工作经历',
+            folder: 'src/content/experience',
+            create: true,
+            slug: '{{slug}}',
+            fields: [
+              { name: 'company', label: '公司名称', widget: 'string' },
+              { name: 'position', label: '职位', widget: 'string' },
+              { name: 'startDate', label: '开始时间', widget: 'string' },
+              { name: 'endDate', label: '结束时间', widget: 'string', required: false },
+              { name: 'current', label: '目前在职', widget: 'boolean', default: false },
+              { name: 'description', label: '工作描述', widget: 'text' },
+              { name: 'highlights', label: '工作亮点', widget: 'list', required: false },
+            ],
+          },
+          {
+            name: 'project',
+            label: '项目展示',
+            folder: 'src/content/project',
+            create: true,
+            slug: '{{slug}}',
+            fields: [
+              { name: 'title', label: '项目名称', widget: 'string' },
+              { name: 'description', label: '项目描述', widget: 'text' },
+              { name: 'image', label: '项目图片', widget: 'image', required: false },
+              { name: 'link', label: '项目链接', widget: 'string', required: false },
+              { name: 'github', label: 'GitHub 仓库', widget: 'string', required: false },
+              { name: 'tags', label: '技术标签', widget: 'list', required: false },
+              { name: 'highlights', label: '项目亮点', widget: 'list', required: false },
+            ],
+          },
+          {
+            name: 'skill',
+            label: '技能清单',
+            folder: 'src/content/skill',
+            create: true,
+            slug: '{{slug}}',
+            fields: [
+              { name: 'category', label: '技能分类', widget: 'string' },
+              { name: 'items', label: '技能列表', widget: 'list', fields: [
+                { name: 'name', label: '技能名称', widget: 'string' },
+                { name: 'level', label: '熟练程度 (1-5)', widget: 'number', value_type: 'int', min: 1, max: 5 },
+              ]},
+            ],
+          },
+          {
+            name: 'about',
+            label: '关于我',
+            folder: 'src/content/about',
+            create: false,
+            editor: { preview: false },
+            fields: [
+              { name: 'personality', label: '性格特点', widget: 'list' },
+              { name: 'hobbies', label: '兴趣爱好', widget: 'list' },
+              { name: 'dailyLife', label: '日常生活', widget: 'text' },
+              { name: 'values', label: '价值观', widget: 'list' },
+            ],
+          },
+        ],
+      }
+    });
+  </script>
+</body>
+</html>

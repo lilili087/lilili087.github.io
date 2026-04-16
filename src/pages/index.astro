@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// 默认数据（可通过后台编辑）
+const profile = {
+  name: 'Xinxin Li',
+  title: '产品设计师 / 前端开发者',
+  bio: '热爱创造美好数字体验的设计师，专注于将复杂问题转化为简洁优雅的解决方案。',
+  avatar: '/images/avatar.jpg',
+  email: 'xinxiinli@bupt.edu.cn',
+  github: 'https://github.com/lilili087',
+  location: '北京',
+};
+
+const featuredProjects = [
+  {
+    title: '项目名称一',
+    description: '这是一个展示项目，体现了设计和技术能力的结合。',
+    tags: ['React', 'TypeScript', 'UI/UX'],
+  },
+  {
+    title: '项目名称二',
+    description: '另一个精彩项目，展示了创新思维和执行力。',
+    tags: ['Figma', '用户研究', '产品设计'],
+  },
+];
+---
+
+<BaseLayout title={`${profile.name} - 个人网站`}>
+  <!-- Hero 区域 -->
+  <section style="padding: 4rem 2rem; text-align: center; background: linear-gradient(135deg, #faf9f8 0%, #fff5f5 100%);">
+    <div style="max-width: 800px; margin: 0 auto;">
+      {profile.avatar && (
+        <img 
+          src={profile.avatar} 
+          alt={profile.name}
+          style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 1.5rem; border: 4px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"
+        />
+      )}
+      <h1 style="font-size: 2.5rem; font-weight: 700; color: var(--color-text); margin-bottom: 0.5rem;">
+        {profile.name}
+      </h1>
+      <p style="font-size: 1.25rem; color: var(--color-primary); margin-bottom: 1rem;">
+        {profile.title}
+      </p>
+      <p style="font-size: 1.1rem; color: var(--color-text-light); max-width: 600px; margin: 0 auto 2rem;">
+        {profile.bio}
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="/contact" class="btn">联系我</a>
+        <a href="/projects" class="btn" style="background: white; color: var(--color-primary); border: 2px solid var(--color-primary);">
+          查看项目
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <!-- 快速概览 -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 3rem;">
+      <div class="section" style="text-align: center;">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎨</div>
+        <h3 style="font-weight: 600; margin-bottom: 0.5rem;">产品设计</h3>
+        <p style="color: var(--color-text-light); font-size: 0.95rem;">用户体验驱动的设计方案</p>
+      </div>
+      <div class="section" style="text-align: center;">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">💻</div>
+        <h3 style="font-weight: 600; margin-bottom: 0.5rem;">前端开发</h3>
+        <p style="color: var(--color-text-light); font-size: 0.95rem;">高质量代码实现</p>
+      </div>
+      <div class="section" style="text-align: center;">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
+        <h3 style="font-weight: 600; margin-bottom: 0.5rem;">数据分析</h3>
+        <p style="color: var(--color-text-light); font-size: 0.95rem;">用数据驱动决策</p>
+      </div>
+    </div>
+
+    <!-- 精选项目 -->
+    <section class="section" style="margin-top: 2rem;">
+      <h2 class="section-title">精选项目</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+        {featuredProjects.map((project) => (
+          <div style="border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.5rem; transition: all 0.2s;">
+            <h3 style="font-weight: 600; margin-bottom: 0.75rem; color: var(--color-text);">{project.title}</h3>
+            <p style="color: var(--color-text-light); font-size: 0.95rem; margin-bottom: 1rem;">{project.description}</p>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              {project.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="/projects" class="btn">查看全部项目</a>
+      </div>
+    </section>
+
+    <!-- 关于我预览 -->
+    <section class="section" style="margin-top: 2rem;">
+      <h2 class="section-title">关于我</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
+        <div>
+          <p style="color: var(--color-text-light); margin-bottom: 1.5rem; line-height: 1.8;">
+            我是一个充满好奇心的人，喜欢探索新事物，在工作中追求极致，在生活中保持平衡。
+            相信好的设计能够改变人们的生活，也享受用代码将想法变为现实的过程。
+          </p>
+          <a href="/about" class="btn">了解更多</a>
+        </div>
+        <div style="background: var(--color-primary-light); padding: 2rem; border-radius: var(--radius);">
+          <h3 style="font-weight: 600; margin-bottom: 1rem; color: var(--color-text);">性格特点</h3>
+          <ul style="list-style: none; color: var(--color-text-light);">
+            <li style="margin-bottom: 0.5rem;">✨ 细致认真</li>
+            <li style="margin-bottom: 0.5rem;"> 善于沟通</li>
+            <li style="margin-bottom: 0.5rem;"> 创新思维</li>
+            <li>🎯 目标导向</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

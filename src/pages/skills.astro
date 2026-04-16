@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const skillCategories = [
+  {
+    name: '设计工具',
+    skills: [
+      { name: 'Figma', level: 5 },
+      { name: 'Sketch', level: 4 },
+      { name: 'Adobe XD', level: 4 },
+      { name: 'Photoshop', level: 3 },
+    ],
+  },
+  {
+    name: '前端开发',
+    skills: [
+      { name: 'HTML/CSS', level: 5 },
+      { name: 'JavaScript', level: 4 },
+      { name: 'TypeScript', level: 4 },
+      { name: 'React', level: 4 },
+      { name: 'Vue', level: 3 },
+    ],
+  },
+  {
+    name: '产品能力',
+    skills: [
+      { name: '用户研究', level: 4 },
+      { name: '原型设计', level: 5 },
+      { name: '数据分析', level: 4 },
+      { name: '项目管理', level: 3 },
+    ],
+  },
+];
+---
+
+<BaseLayout title="技能清单 - Xinxin Li">
+  <div class="container">
+    <section class="section">
+      <h2 class="section-title">技能清单</h2>
+      <p style="color: var(--color-text-light); margin-bottom: 2rem;">
+        技能熟练度：⭐ 入门 &nbsp; ⭐⭐ 基础 &nbsp; ⭐⭐⭐ 熟练 &nbsp; ⭐⭐⭐⭐ 精通 &nbsp; ⭐⭐⭐⭐⭐ 专家
+      </p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        {skillCategories.map((category) => (
+          <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.5rem;">
+            <h3 style="font-weight: 600; font-size: 1.1rem; color: var(--color-text); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--color-primary-light);">
+              {category.name}
+            </h3>
+            
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+              {category.skills.map((skill) => (
+                <div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="font-weight: 500; color: var(--color-text);">{skill.name}</span>
+                    <span style="color: var(--color-primary);">{'⭐'.repeat(skill.level)}</span>
+                  </div>
+                  <div style="height: 6px; background: var(--color-border); border-radius: 3px; overflow: hidden;">
+                    <div 
+                      style={`height: 100%; background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-light) 100%); border-radius: 3px; width: ${(skill.level / 5) * 100}%;`}
+                    ></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" style="margin-top: 2rem;">
+      <h2 class="section-title">其他技能</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+        {['英语 (CET-6)', '团队协作', '沟通表达', '时间管理', '快速学习'].map((skill) => (
+          <span class="tag" style="padding: 0.75rem 1.5rem; font-size: 1rem; background: white; border: 1px solid var(--color-border);">{skill}</span>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
